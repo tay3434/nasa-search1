@@ -7,13 +7,15 @@ export class NasaCard extends LitElement {
     this.title = '';
     this.source = '';
     this.alt = '';
+    this.secondary_creator = 'Nasa';
   }
 
   static get properties() {
     return {
         source: { type: String },
         title: { type: String },
-        alt: { type: String}
+        alt: { type: String},
+        secondary_creator: { type: String}
     };
   }
 
@@ -25,8 +27,8 @@ export class NasaCard extends LitElement {
       padding: 16px;
       margin: 20px;
       border: 4px solid gray;
-      width: 220px;
-      height: 380px;
+      width: 240px;
+      height: 340px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -40,12 +42,18 @@ export class NasaCard extends LitElement {
       height: 200px;
       display: block;
       border-radius: 4px;
+      
     }
 
     .details{
       text-align: center;
       font-size: 20px;
       font-family: 'Times New Roman', Times, serif;
+    }
+    .creator{
+      font-size: 16px;
+      font-style: italic;
+      color: #555;
     }
 
     `];
@@ -57,15 +65,18 @@ export class NasaCard extends LitElement {
 
   render() {
     return html`
-      <div class="card" @click="${this.newWindow}">
+      <div class="card" @click="${this.newWindow}" tabindex="0" @keydown="${this.tabWindow}">
           <img src="${this.source}" alt="${this.alt}" />
           <div class="details">${this.title}</div>
+          <div class="creator">Owner of media: ${this.secondary_creator}</div>
       </div>
     `;
   }
 
   tabWindow(e){
-    window.open(this.source, '_blank');
+    if (e.key === 'Enter'){
+      this.newWindow();
+    }
   }
 
 
