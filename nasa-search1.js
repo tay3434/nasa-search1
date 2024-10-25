@@ -1,6 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import "./nasa-card.js";
-export class NasaSearch1 extends LitElement {
+import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
+
+export class NasaSearch1 extends DDDSuper(LitElement) {
   static get properties() {
     return {
       title: { type: String },
@@ -15,6 +17,8 @@ export class NasaSearch1 extends LitElement {
       :host {
         display: block;
         width: 100%;
+        color: var(--ddd-theme-primary);
+        background-color: var(--ddd-theme-primary);
       }
     
       :host([loading]) .results {
@@ -40,7 +44,7 @@ export class NasaSearch1 extends LitElement {
       summary {
         font-size: 24px;
         padding: 8px;
-        color: white;
+        color: var(--ddd-theme-default-roarMaxlight);
         font-size: 42px;
       }
       input {
@@ -52,8 +56,8 @@ export class NasaSearch1 extends LitElement {
       details {
         margin: 16px;
         padding: 16px;
-        background-color: pink;
-        border: 4px solid gray;
+        background-color: var(--ddd-theme-default-athertonViolet);
+        border: var(--ddd-border-sm) var(--ddd-theme-default-coalyGray);
         border-radius: 8px;
       }
     `;
@@ -118,6 +122,10 @@ export class NasaSearch1 extends LitElement {
 
   static get tag() {
     return 'nasa-search1';
+  }
+  static get haxProperties() {
+    return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url)
+      .href;
   }
 }
 customElements.define(NasaSearch1.tag, NasaSearch1);

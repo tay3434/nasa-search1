@@ -1,6 +1,7 @@
 import { LitElement, html, css } from "lit";
+import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 
-export class NasaCard extends LitElement {
+export class NasaCard extends DDDSuper(LitElement) {
 
   constructor() {
     super();
@@ -22,11 +23,11 @@ export class NasaCard extends LitElement {
   static get styles() {
     return [css`
     .card{
-      background-color: powderblue;
+      background-color: var(--ddd-theme-default-skyLight);
       border-radius: 8px;
       padding: 16px;
       margin: 20px;
-      border: 4px solid gray;
+      border: var(--ddd-border-md);
       width: 240px;
       height: 340px;
       display: flex;
@@ -35,7 +36,7 @@ export class NasaCard extends LitElement {
       cursor: pointer;
     }
     .card:hover{
-      background-color: lavender;
+      background-color: var(--ddd-theme-default-accent);
     }
     img {
       width: 240px;
@@ -53,7 +54,7 @@ export class NasaCard extends LitElement {
     .creator{
       font-size: 16px;
       font-style: italic;
-      color: #555;
+      color: var(--ddd-theme-default-coalyGray);
     }
 
     `];
@@ -82,6 +83,10 @@ export class NasaCard extends LitElement {
 
   static get tag() {
     return "nasa-card";
+  }
+  static get haxProperties() {
+    return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url)
+      .href;
   }
 }
 customElements.define(NasaCard.tag, NasaCard);
