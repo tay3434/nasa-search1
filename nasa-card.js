@@ -6,12 +6,14 @@ export class NasaCard extends LitElement {
     super();
     this.title = '';
     this.source = '';
+    this.alt = '';
   }
 
   static get properties() {
     return {
         source: { type: String },
         title: { type: String },
+        alt: { type: String}
     };
   }
 
@@ -24,34 +26,49 @@ export class NasaCard extends LitElement {
       margin: 20px;
       border: 4px solid gray;
       width: 220px;
-      height: 340px;
-      /* box-sizing: border-box; */
+      height: 380px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+    .card:hover{
+      background-color: lavender;
     }
     img {
-      width: 100%;
+      width: 240px;
       height: 200px;
       display: block;
+      border-radius: 4px;
     }
 
     .details{
       text-align: center;
       font-size: 20px;
-      /* padding: 8px 0; */
-      /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
       font-family: 'Times New Roman', Times, serif;
     }
 
     `];
   }
+  
+  newWindow(){
+    window.open(this.source, '_blank');
+  }
 
   render() {
     return html`
-      <div class="card">
-          <img src="${this.source}" />
-          <div class=details>${this.title}</div>
+      <div class="card" @click="${this.newWindow}">
+          <img src="${this.source}" alt="${this.alt}" />
+          <div class="details">${this.title}</div>
       </div>
     `;
   }
+
+  tabWindow(e){
+    window.open(this.source, '_blank');
+  }
+
+
   static get tag() {
     return "nasa-card";
   }
